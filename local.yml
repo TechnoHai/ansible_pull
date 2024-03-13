@@ -20,8 +20,9 @@
 
     - name: update and upgrade redhat repositories  # Update and upgrade the redhat repositories
       dnf:  # Use the dnf module to manage packages
+        name: "*"
+        state: latest  # Update all packages
         update_cache: yes  # Update the package cache
-        upgrade: yes  # Upgrade the installed packages
       when: ansible_distribution in ["RedHat", "Fedora"]  
 
   # This section contains the main tasks to be run.
