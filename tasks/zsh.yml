@@ -1,7 +1,7 @@
 - name: copy zsh config files to user home directory
   copy:
     src: files/zsh/
-    dest: $HOME/.zsh
+    dest: $HOME/
     owner: $USER
     group: $USER
     mode: 0755
