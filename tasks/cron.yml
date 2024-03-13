@@ -2,6 +2,7 @@
 # This task is defined in the ansible_pull/tasks/cron.yml file
 - name: Install cron job  # Name of the task
   cron:  # Use the cron module to manage cron jobs
+    name: ansible_pull  # Name of the cron job
     user: ansible  # User that will run the cron job
     minute: "*/10"  # Minute at which the cron job should run (every 10 minutes)
     job: /usr/bin/ansible-pull -o -U https://github.com/TechnoHai/ansible_pull.git  # Command that will be executed by the cron job -o will run the pull only if there are changes
