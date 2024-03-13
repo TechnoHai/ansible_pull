@@ -1,17 +1,32 @@
----
-- hosts: localhost
-  connection: local
-  become: true
+# This is a playbook that runs on the localhost and is intended to be run with become: true
+# to run as root.
+#
+# It starts by updating and upgrading the debian repositories.
+#
+# Then it includes tasks for managing packages, users, and zsh configuration.
 
-  
+- hosts: localhost  # This playbook runs on the localhost
+  connection: local  # This playbook uses the local connection
+  become: true  # This playbook is run as root
+
+
+  # This section contains tasks that are run before the main tasks.
   pre_tasks:
-    - name: update and upgrade debian repositories
-      apt:
-        update_cache: yes
-        upgrade: yes
+    - name: update and upgrade debian repositories  # Update and upgrade the debian repositories
+      apt:  # Use the apt module to manage packages
+        update_cache: yes  # Update the package cache
+        upgrade: yes  # Upgrade the installed packages
+      when: ansible_distribution in ["Ubuntu", "Debian"]
 
+    - name: update and upgrade redhat repositories  # Update and upgrade the redhat repositories
+      dnf:  # Use the dnf module to manage packages
+        update_cache: yes  # Update the package cache
+        upgrade: yes  # Upgrade the installed packages
+      when: ansible_distribution in ["RedHat", "Fedora"]  
+
+  # This section contains the main tasks to be run.
   tasks:
-    - include: tasks/packages.yml
-    - include: tasks/users.yml
-    - include: tasks/zsh.yml
+    - include: tasks/packages.yml  # Include the tasks for managing packages
+    - include: tasks/users.yml  # Include the tasks for managing users
+    - include: tasks/zsh.yml  # Include the tasks for managing zsh configuration
 

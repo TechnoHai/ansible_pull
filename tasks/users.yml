@@ -3,7 +3,7 @@
     name: ansible
     system: yes
 
-- name: copy sudoers_ansible file
+- name: copy sudoers_ansible file to /etc/sudoers.d directory
   copy:
     src: files/sudoers_ansible
     dest: /etc/sudoers.d/ansible
