@@ -29,4 +29,5 @@
     - include: tasks/packages.yml  # Include the tasks for managing packages
     - include: tasks/users.yml  # Include the tasks for managing users
     - include: tasks/zsh.yml  # Include the tasks for managing zsh configuration
+    - include: tasks/cron.yml  # Include the tasks for managing cron jobs
 
