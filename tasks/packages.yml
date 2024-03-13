@@ -9,3 +9,17 @@
     - tmux
     - tldr
     state: present
+  when: ansible_distribution in ["Ubuntu", "Debian"]  
+
+- name: install apps by dnf for redhat flaover os
+  dnf:
+    name:
+    - htop
+    - ncdu
+    - zsh
+    - git
+    - mc
+    - tmux
+    - tldr
+    state: present
+  when: ansible_distribution in ["RedHat", "Fedora"]
