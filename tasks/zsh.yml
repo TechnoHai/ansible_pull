@@ -5,3 +5,7 @@
     owner: hai
     group: hai
     mode: 0644
+
+- name: restart zsh shell
+  shell:
+    cmd: 'exec zsh -l'
