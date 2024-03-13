@@ -1,0 +1,11 @@
+- name: install apps by apt
+  apt:
+    name:
+    - htop
+    - ncdu
+    - zsh
+    - git
+    - mc
+    - tmux
+    - tldr
+    state: present

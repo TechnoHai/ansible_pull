@@ -4,23 +4,11 @@
   become: true
 
   
-  tasks:
-  
-  - name: Distribution
-    debug: msg="{{ ansible_distribution }}"
-  - name: Distribution version
-    debug: msg="{{ ansible_distribution_version}}"
-  - name: Distribution major version
-    debug: msg="{{ ansible_distribution_major_version }}"
+  pre_tasks:
+    - name: update and upgrade debian repositories
+      apt:
+        update_cache: yes
+        upgrade: yes
 
-  - name: install apps via apt
-    apt:
-      name:
-      - htop
-      - ncdu
-      - zsh
-      - git
-      - mc
-      - tmux
-      - tldr
-      state: present
+  tasks:
+    - include: tasks/packages.yml
