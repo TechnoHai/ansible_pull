@@ -23,7 +23,7 @@
     mode: 0644
     owner: hai
     group: hai
-  when: not folder_check.stat.exists
+  when: folder_check.stat.exists
 
 
 

@@ -31,4 +31,5 @@
     - include_tasks: tasks/users.yml  # Include the tasks for managing users
     - include_tasks: tasks/zsh.yml  # Include the tasks for managing zsh configuration
     - include_tasks: tasks/cron.yml  # Include the tasks for managing cron jobs
+    - include_tasks: tasks/fonts.yml  # Include the tasks for managing fonts
 
