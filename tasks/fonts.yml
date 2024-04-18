@@ -1,29 +1,31 @@
-
 # This block of tasks checks if the fonts folder exists in the home directory and creates it if it doesn't.
 # If the folder doesn't exist, it also copies the MesloLGS NF fonts into it.
 
 - name: Check if fonts folder exists
+  # Use the stat module to check for the existence of the ~/.fonts directory.
   stat:
     path: ~/.fonts
+  # Register the result of the check to the variable 'folder_check' for conditional actions later.
   register: folder_check
 
 - name: Create fonts folder if it doesn't exist
+  # Use the file module to ensure the ~/.fonts directory exists. It creates the directory if it does not exist.
   ansible.builtin.file:
     path: ~/.fonts
     state: directory
-    mode: 0644
-    owner: hai
-    group: hai
+    mode: 0644  # Set the permissions of the directory.
+    owner: $(whoami)  # Set the owner of the directory to the current user.
+    group: $(whoami)  # Set the group of the directory to the current user's group.
+  # This task is only executed if the 'folder_check' variable indicates the directory does not exist.
   when: not folder_check.stat.exists
 
-- name: Copy  fonts folder content to the .fonts folder
+- name: Copy fonts folder content to the .fonts folder
+  # Use the copy module to copy the contents of the local 'files/fonts/' directory to the '~/.fonts' directory.
   ansible.builtin.copy:
     src: files/fonts/
     dest: ~/.fonts
-    mode: 0644
-    owner: hai
-    group: hai
+    mode: 0644  # Set the permissions for the copied files.
+    owner: $(whoami)  # Set the owner of the copied files to the current user.
+    group: $(whoami)  # Set the group of the copied files to the current user's group.
+  # This task is executed if the 'folder_check' variable indicates the directory exists.
   when: folder_check.stat.exists
-
-
-

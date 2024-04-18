@@ -1,9 +1,9 @@
 - name: copy zsh config files to user home directory
   copy:
     src: files/zsh/
-    dest: /home/hai/
-    owner: hai
-    group: hai
+    dest: ~/
+    owner: $(whoami)
+    group: $(whoami)
     mode: 0644
 
 - name: restart zsh shell
